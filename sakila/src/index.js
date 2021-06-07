@@ -7,8 +7,11 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header />
-    <Footer />
+    <Header/>
+    <Footer>
+      <h3>disclaimer</h3>
+      <p>this is some text</p>
+    </Footer>
   </React.StrictMode>,
   document.getElementById('root')
 );

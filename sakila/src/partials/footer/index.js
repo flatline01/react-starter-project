@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Nav from "../../components/nav";
+import navSource from '../../data/footerlinks.json';
+
 
 class Footer extends Component {
     render() {
       return (
         <footer>
             <div class="container">
-                <p>this is the footer</p>
-                <Nav cssClass="footernav"/>
+                {this.props.children}
+                <Nav cssClass="footernav" datasource={navSource.nav} />
             </div>
         </footer>
       );

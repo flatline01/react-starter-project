@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import myData from '../data/headerlinks.json';
+
 
 
 class Nav extends Component {
@@ -14,7 +14,7 @@ class Nav extends Component {
     componentDidMount() {
         this.setState({
             isLoaded: true,
-            items: myData.nav
+            items: this.props.datasource
         });
     }
     render() {
