@@ -27,18 +27,51 @@ class Nav extends Component {
         } 
         else {
         return (
-            <nav class={this.props.cssClass} >
-                <ul>
-                {items.map(item => (
-                    <li key={item.id}>
-                        <a href={item.url}> {item.label}</a>
-                    </li>
-                ))}
-                </ul>
+            <nav className={this.props.cssClass} >
+                <Menu datasource={items} />
             </nav>
         );
         }
     }
-  }
+}
 
-export default Nav;
+class Menu extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            items: []
+        };
+    }
+    componentDidMount() {
+        this.setState({
+            isLoaded: true,
+            items: this.props.datasource
+        });
+    }
+   render() {
+    const { items } = this.state;
+        return(
+            <ul>
+                {items.map(item => (
+                    <li data-key={item.id}>
+                            {item.target
+                                ? <a href={item.url} target="_blank" rel="noreferrer"> {item.label}</a>
+                                : <a href={item.url}> {item.label}</a>
+                            }
+                            {item.nav
+                                ? <Menu datasource={item.nav} />
+                                : ""
+                            }
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+}
+
+export {
+    Nav,
+    Menu
+}

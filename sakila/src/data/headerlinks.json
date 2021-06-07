@@ -1,6 +1,15 @@
 {
     "nav": [
-        { "id": 1, "label": "About Us",  "url": "/about" },
+        { 
+            "id": 1, 
+            "label": "About Us",  
+            "url": "/about",
+            "nav":[
+                { "id": 3, "label": "History", "url": "/about/history" },
+                { "id": 4, "label": "Locations", "url": "/about/locations" },
+                { "id": 5, "label": "Loyalty Program", "url": "/about/loyalty-program" }
+            ] 
+        },
         { "id": 2, "label": "Contact", "url": "/contact" }
     ] 
 }

@@ -1,6 +1,8 @@
 {
     "nav": [
         { "id": 1, "label": "About Us",  "url": "/about" },
-        { "id": 2, "label": "Contact", "url": "/contact" }
+        { "id": 2, "label": "Contact", "url": "/contact" },
+        { "id": 3, "label": "Privacy Policy", "url": "https://example.com", "target":"new" },
+        { "id": 4, "label": "Terms and Conditions", "url": "https://example.com", "target":"new" }
     ] 
 }
