@@ -1,0 +1,6 @@
+{
+    "nav": [
+        { "id": 1, "label": "About Us",  "url": "/about" },
+        { "id": 2, "label": "Contact", "url": "/contact" }
+    ] 
+}
