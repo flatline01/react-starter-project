@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get("/actors/", function(req,res,next){
+router.all("/api/actors/", function(req,res,next){
   knex("actor").select("*")
   .then(data=>{
     res.json(data)

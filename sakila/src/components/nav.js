@@ -55,7 +55,7 @@ class Menu extends Component{
         return(
             <ul>
                 {items.map(item => (
-                    <li data-key={item.id}>
+                    <li key={item.id}>
                             {item.target
                                 ? <a href={item.url} target="_blank" rel="noreferrer"> {item.label}</a>
                                 : <a href={item.url}> {item.label}</a>
