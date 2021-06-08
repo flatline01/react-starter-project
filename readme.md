@@ -4,6 +4,8 @@ Actual project root. We will likely add a node/express backend here, and run the
 
 We will use the default actors demo database provided by mysql.
 
+
+
 # Resources and links
 * https://reactjs.org/docs/faq-ajax.html
 
@@ -28,4 +30,3 @@ We suggest that you begin by typing:
   cd sakila
   npm start
 
-Happy hacking!
