@@ -1,13 +1,21 @@
+.datagridholder{
+    display: flex;
+}
 .datagrid{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     background: #ccc;
+    width:72%;
+    padding:1%;
+}
+.filter{
+    width: 24%;
 }
 .card{
-    width: 29.333%;
+    width: 29%;
     display: inline-block;
     background: #fff;
     padding:1%;
-    margin:1%;
+    margin:0 0 3%;
 }

@@ -10,7 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Header/>
     <main>
-      <Datagrid endpoint="/actors"></Datagrid>
+      <Datagrid endpoint="/api/actors"></Datagrid>
     </main>
     <Footer>
       <h3>disclaimer</h3>

@@ -25,49 +25,54 @@ class Datagrid  extends Component{
             // instead of a catch() block so that we don't swallow
             // exceptions from actual bugs in components.
             (error) => {
-              this.setState({
-                isLoaded: true,
-                error
-              });
+                this.setState({
+                    isLoaded: true,
+                    error
+                });
             }
-          )
-      }
+        )
+    }
 
 
     render() {
         const { error, isLoaded, items } = this.state;
         console.log(items)
         if (error) {
-            return <section><div className="container"><div className="datagrid error">Error: {error.message}</div></div></section>;
+            return <section><div className="container  datagridholder"><div className="datagrid error">Error: {error.message}</div></div></section>;
         } 
         else if (!isLoaded) {
-            return <section><div className="container"><div className="datagrid loading">loading....</div></div></section>;
+            return <section><div className="container  datagridholder"><div className="datagrid loading">loading....</div></div></section>;
         } 
         else{
             return(
                 <section>
                     <div className="container">
                         <h1>Sakila Actors</h1>
-                        <div className="datagrid loaded">
-                            {items.map(item => (
-                                <div className="card">
-                                    <a href="/actors/byId">
-                                        <h3>{item.first_name.toLowerCase()} {item.last_name.toLowerCase()}</h3>
-                                    </a>
-                                    <h4>Address</h4>
-                                    <a href="/address">
-                                        <address>
-                                            <span>{item.address}</span>
-                                            <span>{item.city}</span>
-                                            <span>{item.district}, {item.postal_code}</span>
-                                        </address>
-                                    </a>
-                                    {item.phone
-                                        ? <a href={`tel:${item.phone}`}>call</a>
-                                        : ""
-                                    }
-                                </div>
-                            ))}
+                        <p>Loaded from the default MySql Database</p>
+                        <p>This should be rewritten for more generic item handling.</p>
+                        <div className="datagridholder">
+                            <div className="filter"></div>
+                            <div className="datagrid loaded">
+                                {items.map(item => (
+                                    <div className="card">
+                                        <a href="/actors/byId">
+                                            <h3>{item.first_name.toLowerCase()} {item.last_name.toLowerCase()}</h3>
+                                        </a>
+                                        <h4>Address</h4>
+                                        <a href="/address">
+                                            <address>
+                                                <span>{item.address}</span>
+                                                <span>{item.city}</span>
+                                                <span>{item.district}, {item.postal_code}</span>
+                                            </address>
+                                        </a>
+                                        {item.phone
+                                            ? <a href={`tel:${item.phone}`}>call</a>
+                                            : ""
+                                        }
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </section>

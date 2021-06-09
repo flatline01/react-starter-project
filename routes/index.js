@@ -7,7 +7,7 @@ knex.knex = knex(config.connection);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.sendFile('/sakila/build/index.html', { root: __dirname });
 });
 
 
