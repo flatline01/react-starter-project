@@ -14,7 +14,7 @@ ReactDOM.render(
     </main>
     <Footer>
       <h3>disclaimer</h3>
-      <p>this is some text</p>
+      <p>this is some text. i swear.</p>
     </Footer>
   </React.StrictMode>,
   document.getElementById('root')

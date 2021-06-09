@@ -4,11 +4,11 @@ Actual project root. We will likely add a node/express backend here, and run the
 
 We will use the default actors demo database provided by mysql.
 
-This is NOT a production ready repo. This is more trying to glue together react and express into a singular project. so we dont have to run two services or deployments.
+This is NOT a production ready repo. This is more trying to glue together react and express into a singular project, so we dont have to run two services or deployments.
 
 Adding   
 `"proxy":"http://localhost:3001/",`
-to the react package.json will proxy requests to the back end. 
+to the react package.json will proxy requests to the back end while running the development server. 
 
 
 

@@ -54,7 +54,7 @@ class Datagrid  extends Component{
                             <div className="filter"></div>
                             <div className="datagrid loaded">
                                 {items.map(item => (
-                                    <div className="card">
+                                    <div className="card" key={item.id}>
                                         <a href="/actors/byId">
                                             <h3>{item.first_name.toLowerCase()} {item.last_name.toLowerCase()}</h3>
                                         </a>
