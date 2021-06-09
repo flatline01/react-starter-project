@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Header from "./partials/header/index";
 import Footer from "./partials/footer/index";
+import {Datagrid} from "./components/datagrid"; 
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <Header/>
-    
+    <main>
+      <Datagrid endpoint="/actors"></Datagrid>
+    </main>
     <Footer>
       <h3>disclaimer</h3>
       <p>this is some text</p>

@@ -8,6 +8,7 @@ We will use the default actors demo database provided by mysql.
 
 # Resources and links
 * https://reactjs.org/docs/faq-ajax.html
+* https://stackoverflow.com/questions/41495658/use-custom-build-output-folder-when-using-create-react-app
 
 Success! Created sakila at C:\inetpub\wwwroot\react-starter-project\sakila
 Inside that directory, you can run several commands:

@@ -1,0 +1,13 @@
+.datagrid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: #ccc;
+}
+.card{
+    width: 29.333%;
+    display: inline-block;
+    background: #fff;
+    padding:1%;
+    margin:1%;
+}

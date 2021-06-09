@@ -7,7 +7,12 @@
             "nav":[
                 { "id": 3, "label": "History", "url": "/about/history" },
                 { "id": 4, "label": "Locations", "url": "/about/locations" },
-                { "id": 5, "label": "Loyalty Program", "url": "/about/loyalty-program" }
+                { "id": 5, "label": "Loyalty Program", "url": "/about/loyalty-program",
+                "nav":[
+                    { "id": 6, "label": "Check points", "url": "/about/loyalty-program/check-points"},
+                    { "id": 7, "label": "Get New Card", "url": "/about/loyalty-program/new-card"},
+                    { "id": 8, "label": "Change my address", "url": "/about/loyalty-program/change-address"}
+                ]}
             ] 
         },
         { "id": 2, "label": "Contact", "url": "/contact" }
