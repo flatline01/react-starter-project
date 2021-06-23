@@ -5,17 +5,27 @@ import Header from "./partials/header/index";
 import Footer from "./partials/footer/index";
 import {Datagrid} from "./components/datagrid"; 
 import reportWebVitals from './reportWebVitals';
+import {Switch, BrowserRouter, Router, Route,} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header/>
-    <main>
-      <Datagrid endpoint="/api/actors"></Datagrid>
-    </main>
-    <Footer>
-      <h3>disclaimer</h3>
-      <p>this is some text. i swear.</p>
-    </Footer>
+    <BrowserRouter forceRefresh={true}>
+      <Header/>
+      <main>
+          <Switch>
+            <Route exact path="/about">
+              <h3>about</h3>
+            </Route>
+            <Route path="/">
+              <Datagrid endpoint="/api/actors"></Datagrid>
+            </Route>
+          </Switch>
+      </main>
+      <Footer>
+        <h3>disclaimer</h3>
+        <p>this is some text. i swear.</p>
+      </Footer>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

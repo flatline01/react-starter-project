@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { BrowserRouter, NavLink } from "react-router-dom";
 
 
 class Nav extends Component {
@@ -8,7 +8,7 @@ class Nav extends Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
         };
     }
     componentDidMount() {
@@ -58,7 +58,7 @@ class Menu extends Component{
                     <li key={item.id}>
                             {item.target
                                 ? <a href={item.url} target="_blank" rel="noreferrer"> {item.label}</a>
-                                : <a href={item.url}> {item.label}</a>
+                                : <NavLink to={item.url}  activeClassName="active"> {item.label}</NavLink>
                             }
                             {item.nav
                                 ? <Menu datasource={item.nav} />
@@ -66,7 +66,7 @@ class Menu extends Component{
                             }
                     </li>
                 ))}
-            </ul>
+        </ul>
         )
     }
 }
