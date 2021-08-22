@@ -6,6 +6,7 @@ import Footer from "./partials/footer/index";
 import {Datagrid} from "./components/datagrid"; 
 import reportWebVitals from './reportWebVitals';
 import {Switch, BrowserRouter, Router, Route,} from "react-router-dom";
+import {AboutUs} from './content/about'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,9 +15,16 @@ ReactDOM.render(
       <main>
           <Switch>
             <Route exact path="/about">
-              <h3>about</h3>
+              <AboutUs/>
             </Route>
             <Route path="/">
+              <section>
+                <div className="container">
+                  <h1>Sakila Actors</h1>
+                  <p>Loaded from the default MySql Database</p>
+                  <p>This should be rewritten for more generic item handling.</p>
+                </div>
+              </section>
               <Datagrid endpoint="/api/actors"></Datagrid>
             </Route>
           </Switch>

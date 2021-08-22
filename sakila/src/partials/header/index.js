@@ -7,7 +7,7 @@ class Header extends Component {
     render() {
       return (
         <header>
-            <div cssclass="container">
+            <div className="container">
                 <a href="/" cssclass="logo">Home</a>
                 <Nav cssClass="topnav" datasource={navSource.nav}/>
             </div>

@@ -7,7 +7,7 @@ class Footer extends Component {
     render() {
       return (
         <footer>
-            <div cssclass="container">
+            <div className="container">
                 {this.props.children}
                 <Nav cssclass="footernav" datasource={navSource.nav} />
             </div>
