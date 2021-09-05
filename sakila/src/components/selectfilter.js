@@ -1,18 +1,47 @@
 import React, { Component } from 'react';
 
+/* function Subselect(params) {
+    let endpoint=params.endpoint
+    let query=params.query
+    let items=[];
+    let loaded=false;
+    fetch(`${endpoint}/${query}`)
+        .then(res => res.json())
+        .then((result) =>{
+            items=result.result
+        })
 
-class SelectFilter  extends Component{
+    return( 
+        <label className="subselection">
+            <span>Sub Filter</span>
+            <select>
+                <option>Select City</option>
+                {
+                    items.map(item => (
+
+                        <option  key={item[city_id]} value={item[city]}>{item.city}</option>
+                    ))
+                }
+            </select>
+        </label>
+    )
+} */
+
+class SelectFilter extends Component{
     constructor(props) {
         super(props);
         this.state = {
           error: null,
           isLoaded: false,
-          items: []
+          items: [],
+          subselect:[],
+          subactive:false,
+          substate:""
         };
     }
     componentDidMount() {
         if(this.props.endpoint){
-            fetch(this.props.endpoint)
+            fetch(`${this.props.endpoint}/${this.props.query}`)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -34,37 +63,48 @@ class SelectFilter  extends Component{
         }
         
     }
-    sortBy = () => {
+    sortBy = (params) => {
         let e = document.getElementById(this.props.id);
         let selected = e.options[e.selectedIndex].value;
-        console.log(selected)
+        this.setState({
+            subactive:true,
+            substate:selected
+        })
     }
 
+    
+
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, items, subactive} = this.state;
         const optionkey = this.props.keyvalue.split(",")[0]
         const optionval = this.props.keyvalue.split(",")[1]
+        let sub;
         if (error) {
             console.log(error)
-            return <div class="error selectfilter">Error</div>
+            return <div className="error selectfilter">Error</div>
         } 
         else if (!isLoaded) {
-            return <div class="loading selectfilter">Loading...</div>;
+            return <div className="loading selectfilter">Loading...</div>;
         } 
         else{
+            if(subactive){
+               sub = <SelectFilter title="City" keyvalue="city_id,city" endpoint="/api/cities" query={this.state.substate}/>
+            }
             return (
-                <div class="loaded selectfilter">
+                <div className="loaded selectfilter">
                     <label>
                         <span>{this.props.title}</span>
-                        <select onChange={this.sortBy} id={this.props.id}>
+                        <select onChange={this.sortBy} key={this.props.id} id={this.props.id}>
                             <option>Select -- </option>
                             {
                                 items.map(item => (
-                                    <option value={item[optionkey]}>{item[optionval]}</option>
+                                    <option  key={item[optionkey]} value={item[optionkey]}>{item[optionval]}</option>
                                 ))
                             }
                         </select>
+                      
                     </label>
+                    {sub}
                 </div>
             )
         }
