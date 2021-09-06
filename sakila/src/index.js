@@ -7,6 +7,7 @@ import {Datagrid} from "./components/datagrid";
 import reportWebVitals from './reportWebVitals';
 import {Switch, BrowserRouter, Router, Route,} from "react-router-dom";
 import {AboutUs} from './content/about'
+import {ById} from "./content/byId"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -17,21 +18,19 @@ ReactDOM.render(
             <Route exact path="/about">
               <AboutUs/>
             </Route>
+            <Route path="/actors/byId/:id?" component={ById} />
             <Route path="/">
-              <section>
-                <div className="container">
+              <Datagrid endpoint="/api/actors">
                   <h1>Sakila Actors</h1>
                   <p>Loaded from the default MySql Database</p>
                   <p>This should be rewritten for more generic item handling.</p>
-                </div>
-              </section>
-              <Datagrid endpoint="/api/actors"></Datagrid>
+                  </Datagrid>
             </Route>
           </Switch>
       </main>
       <Footer>
         <h3>disclaimer</h3>
-        <p>this is some text. i swear.</p>
+        <p>This is not production ready.</p>
       </Footer>
     </BrowserRouter>
   </React.StrictMode>,

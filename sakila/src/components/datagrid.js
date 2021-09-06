@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { SelectFilter } from './selectfilter';
 import "./datagrid.css"
+
 
 class Datagrid  extends Component{
     constructor(props) {
@@ -34,7 +35,6 @@ class Datagrid  extends Component{
         )
     }
 
-
     render() {
         const { error, isLoaded, items } = this.state;
         //console.log(items)
@@ -48,10 +48,11 @@ class Datagrid  extends Component{
             return(
                 <section>
                     <div className="container">
+                        {this.props.children}
                         <div className="datagridholder">
                             <div className="filter">
                                 <h3>Filters</h3>
-                                <SelectFilter id="countries" keyvalue="country_id,country" endpoint="/api/countries" title="Countries"></SelectFilter>
+                                <SelectFilter id="countries" keyvalue="country_id,country" endpoint="/api/" query="countries" title="Countries"></SelectFilter>
                                 
                             </div>
                             <div className="datagrid loaded">
@@ -80,6 +81,7 @@ class Datagrid  extends Component{
                                 ))}
                             </div>
                         </div>
+                        <div>pagination</div>
                     </div>
                 </section>
             );
