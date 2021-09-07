@@ -370,6 +370,9 @@ header nav ul li a {
   font-weight: 900;
   color: #1316cf;
 }
+header nav ul li a.active {
+  background: #edf4f7;
+}
 header nav ul li ul {
   background: #11ebcb;
   position: absolute;

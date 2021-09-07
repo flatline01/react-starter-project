@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import {Switch, BrowserRouter, Router, Route,} from "react-router-dom";
 import {AboutUs} from './content/about'
 import {ById} from "./content/byId"
+import {Home} from "./content/home"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,13 +20,14 @@ ReactDOM.render(
               <AboutUs/>
             </Route>
             <Route path="/actors/byId/:id?" component={ById} />
-            <Route path="/">
-              <Datagrid endpoint="/api/actors">
+            <Route path="/actors">
+              <Datagrid >
                   <h1>Sakila Actors</h1>
                   <p>Loaded from the default MySql Database</p>
                   <p>This should be rewritten for more generic item handling.</p>
                   </Datagrid>
             </Route>
+            <Route path="/" component={Home} />
           </Switch>
       </main>
       <Footer>

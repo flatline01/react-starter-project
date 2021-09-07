@@ -1,5 +1,10 @@
 {
     "nav": [
+        {
+            "id":0,
+            "label":"Sakila Actors",
+            "url":"/actors"
+        },
         { 
             "id": 1, 
             "label": "About Us",  

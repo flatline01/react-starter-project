@@ -2,11 +2,14 @@
     display: flex;
 }
 .datagrid{
+    width:72%;
+}
+.datagrid .cardholder{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     background: #ccc;
-    width:72%;
+    width:100%;
     padding:1%;
 }
 .filter{

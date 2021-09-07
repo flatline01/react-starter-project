@@ -11,9 +11,10 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get("/api/actors/:limit?/:startat?", function(req,res,next){
+router.get("/api/actors/:limit?/:startat?", async function(req,res,next){
   let limit = req.params.limit || "10";
   let startAt = req.params.startat || "0"
+  let numOfActors = await knex("actor").count('actor_id as CNT').then(data=>{return data[0].CNT})
   knex("actor")
   .select("*")
   .join("address","actor.actor_id","=","address.address_id")
@@ -23,7 +24,11 @@ router.get("/api/actors/:limit?/:startat?", function(req,res,next){
   )
   .limit(limit)
   .then(data=>{
-    res.json({result:data})
+    res.json({
+      startAt:startAt,
+      numOfActors:numOfActors,
+      result:data
+    })
   })
   .catch(err=>{
     res.json({err:"no actors found"})

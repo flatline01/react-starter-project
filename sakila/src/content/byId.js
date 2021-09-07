@@ -13,11 +13,15 @@ class ById  extends Component{
         };
     }
     componentDidMount() {
+       
             fetch(`/api/getById/${this.state.actorID}`)
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result)
+                document.title = `${result.result[0].first_name} ${result.result[0].last_name} | Sakila React Project`  ;
+                document.querySelector('meta[name="description"]').setAttribute("content", `${result.result[0].first_name} ${result.result[0].last_name} is an acotr found in the sakila database`);
+                document.querySelector('meta[name="og:desc"]').setAttribute("content", `${result.result[0].first_name} ${result.result[0].last_name} is an acotr found in the sakila database`);
+
                 this.setState({
                     isLoaded: true,
                     items: result.result,
@@ -42,7 +46,7 @@ class ById  extends Component{
             <section id={`actor_${this.state.actorID}`}>
                 <div className="container">
                     {items.map(item => (
-                            <div className="actor">
+                            <div className="actor" key={item.id}>
                                 <h1>Actor: {item.first_name} {item.last_name}</h1>
                                 <p>Number {this.state.actorID} of {this.state.numOfActors}</p>
                             </div>
