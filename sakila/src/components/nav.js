@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 class Nav extends Component {
@@ -13,7 +13,7 @@ class Nav extends Component {
     }
     componentDidMount() {
         this.setState({
-            isLoaded: true,
+            isLoaded: true, 
             items: this.props.datasource
         });
     }
@@ -51,19 +51,28 @@ class Menu extends Component{
         });
     }
    render() {
-    const { items } = this.state;
+        const { items } = this.state;
         return(
             <ul>
                 {items.map(item => (
                     <li key={item.id}>
-                            {item.target
-                                ? <a href={item.url} target="_blank" rel="noreferrer"> {item.label}</a>
-                                : <NavLink to={item.url}  activeClassName="active"> {item.label}</NavLink>
+                        {(() => {
+                            switch (item.target) {
+                                case "internal": return(
+                                    <a href={item.url}>{item.label}</a>
+                                )
+                                case "external": return(
+                                    <a href={item.url} target="_blank" rel="noreferrer">{item.label}</a>
+                                )   
+                                default: return(
+                                    <NavLink to={item.url} activeClassName="active">{item.label}</NavLink>
+                                )
                             }
-                            {item.nav
-                                ? <Menu datasource={item.nav} />
-                                : ""
-                            }
+                        })()}
+                        {item.nav
+                            ? <Menu datasource={item.nav} />
+                            : ""
+                        }
                     </li>
                 ))}
         </ul>

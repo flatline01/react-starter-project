@@ -14,7 +14,29 @@ a {
 address span{
   display: block;
 }
-.card h3{text-transform: uppercase;}
+.card{ 
+  .info{
+    display: flex;
+    .photo{
+      flex:1;
+      margin-right: 2%;
+      .photoholder{
+        padding:4px;
+        border:1px solid #ccc;
+      }
+      img{
+        display: block;
+      }
+    }
+    .photo.nophoto{
+      background:#ccc;
+    }
+    .address{
+      flex:2
+    }
+  }
+  h3{text-transform: uppercase;}
+}
 main{
   background: #edf4f7;
   border-bottom: 1px solid;

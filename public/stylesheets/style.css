@@ -337,6 +337,26 @@ address span {
   display: block;
 }
 
+.card .info {
+  display: flex;
+}
+.card .info .photo {
+  flex: 1;
+  margin-right: 2%;
+}
+.card .info .photo .photoholder {
+  padding: 4px;
+  border: 1px solid #ccc;
+}
+.card .info .photo img {
+  display: block;
+}
+.card .info .photo.nophoto {
+  background: #ccc;
+}
+.card .info .address {
+  flex: 2;
+}
 .card h3 {
   text-transform: uppercase;
 }

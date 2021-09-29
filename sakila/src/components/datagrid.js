@@ -49,6 +49,21 @@ class SimpleSelect extends Component{
     }
 }
 
+class Card extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            editing:false
+        }
+    }
+    render(){
+        return(
+            <div className="card">
+
+            </div>
+        )
+    }
+}
 
 
 class Datagrid  extends Component{
@@ -60,6 +75,8 @@ class Datagrid  extends Component{
           numAtATime:10,
           total:"",
           startAt:0,
+          sortBy:"alpha",
+          sortDirection:"asc",
           items: []
         };
         this.handleNumberOfItems = this.handleNumberOfItems.bind(this)
@@ -86,25 +103,27 @@ class Datagrid  extends Component{
         )
     }
     componentDidUpdate(){
-        fetch(`/api/actors/${this.state.numAtATime}/${this.state.startAt}`)
-          .then(res => res.json())
-          .then(
-            (result) => {
-              this.setState({
-                isLoaded: true,
-                items: result.result
-              });
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
+        if(this.state.isLoaded === false){
+            fetch(`/api/actors/${this.state.numAtATime}/${this.state.startAt}`)
+            .then(res => res.json())
+            .then(
+                (result) => {
                 this.setState({
                     isLoaded: true,
-                    error
+                    items: result.result
                 });
-            }
-        )
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+        }
     }
     handleNumberOfItems(numAtATime) {
         console.log("handling it", numAtATime)
@@ -146,25 +165,43 @@ class Datagrid  extends Component{
                                 <div className="cardholder">
                                     {items.map(item => (
                                         <div className="card" key={item.actor_id}>
-                                            <a href={`/actors/byId/${item.actor_id}`}>
-                                                <h3>{item.first_name.toLowerCase()} {item.last_name.toLowerCase()}</h3>
-                                            </a>
-                                            <h4>Address</h4>
-                                            <a href={`/address/${item.actor_id}`}>
-                                                <address>
-                                                    <span>{item.address}</span>
-                                                    <span>{item.city}</span>
-                                                    <span>{item.district}, {
-                                                        item.postal_code 
-                                                            ? `${item.postal_code}, `
+                                            <div className="controls">
+                                                <a href="#edit">edit</a>
+                                            </div>
+                                            <div className="holder">
+                                                <a href={`/actors/byId/${item.actor_id}`}>
+                                                    <h3>{item.first_name.toLowerCase()} {item.last_name.toLowerCase()}</h3>
+                                                </a>
+                                                <div className="info">
+                                                    { item.imgname
+                                                        ? <div className='photo'><div className="photoholder"><img src={`http://localhost:3001/images/profiles/${item.imgname}`} alt={`Headshot for ${item.first_name.toLowerCase()} ${item.last_name.toLowerCase()}`}/></div></div>
+                                                        : <div className='photo nophoto'></div>
+                                                    }
+                                                    <div className="address">
+                                                        {item.intro
+                                                            ? <div className="intro">{item.intro}</div>
+                                                            : <div className="intro notext"></div>
+
+                                                        }
+                                                        <h4>Address</h4>
+                                                        <a href={`/address/${item.actor_id}`}>
+                                                            <address>
+                                                                <span>{item.address}</span>
+                                                                <span>{item.city}</span>
+                                                                <span>{item.district}, {
+                                                                    item.postal_code 
+                                                                        ? `${item.postal_code}, `
+                                                                        : ""
+                                                                    } {item.country}</span>
+                                                            </address>
+                                                        </a>
+                                                        {item.phone
+                                                            ? <a href={`tel:${item.phone}`} className="button callnow">call</a>
                                                             : ""
-                                                        } {item.country}</span>
-                                                </address>
-                                            </a>
-                                            {item.phone
-                                                ? <a href={`tel:${item.phone}`} className="button callnow">call</a>
-                                                : ""
-                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

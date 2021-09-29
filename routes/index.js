@@ -10,6 +10,10 @@ router.get('/', function(req, res, next) {
   res.sendFile('/sakila/src/index.html', { root: __dirname });
 });
 
+router.get("/testroute", function(req,res,next) {
+  res.send("ok")
+})
+
 
 router.get("/api/actors/:limit?/:startat?", async function(req,res,next){
   let limit = req.params.limit || "10";
@@ -19,6 +23,7 @@ router.get("/api/actors/:limit?/:startat?", async function(req,res,next){
   .select("*")
   .join("address","actor.actor_id","=","address.address_id")
   .join("city","address.city_id", "=", "city.city_id")
+  .join("profiles","profiles.id", "=", "actor.actor_id")
   .join(
     knex("country").as("X"), "x.country_id", "city.country_id"
   )
@@ -35,6 +40,8 @@ router.get("/api/actors/:limit?/:startat?", async function(req,res,next){
   })
 
 })
+
+
 
 router.get("/api/cities/:country_id", function(req,res,next){
   knex("country")

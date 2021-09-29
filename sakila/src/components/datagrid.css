@@ -22,3 +22,6 @@
     padding:1%;
     margin:0 0 1.75%;
 }
+.datagridholder.loading{
+    min-height: 90vh;
+}
