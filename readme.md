@@ -37,6 +37,8 @@ Inside that directory, you can run several commands:
     Removes this tool and copies build dependencies, configuration files
     and scripts into the app directory. If you do this, you can’t go back!
 
+Project uses dotenv to load enviroment variables. Rename `.env.example` to `.env` and add your paths and keys. On a running instance, these would be controlled via process.env variables.
+
 We suggest that you begin by typing:
   nodemon //in the root
   cd sakila
