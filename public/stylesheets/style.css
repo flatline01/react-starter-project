@@ -327,6 +327,7 @@ body, html {
 .container {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 a {
@@ -337,6 +338,14 @@ address span {
   display: block;
 }
 
+.card {
+  border-radius: 5px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+.card.editing {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
 .card .info {
   display: flex;
 }
@@ -366,11 +375,36 @@ main {
   border-bottom: 1px solid;
 }
 
+.home .banner {
+  background: url(/images/sunset.jpg) no-repeat center center/cover;
+  padding: 10vh 0;
+}
+.home .banner h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 16vw;
+  line-height: 74%;
+  letter-spacing: -1vw;
+  font-weight: 900;
+  color: rgba(0, 183, 255, 0.9);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+}
+.home .banner h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 6vw;
+  line-height: 74%;
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.9);
+  text-transform: uppercase;
+}
+
 header {
   background: #11ebcb;
+  position: relative;
 }
 header .container {
   display: flex;
+  padding-top: 40px;
 }
 header nav {
   flex: 1;
@@ -404,6 +438,20 @@ header nav ul li:hover > ul {
 }
 header nav ul ul ul {
   left: 100%;
+  top: 0;
+}
+
+.overlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 1000;
+  transition: 0.5s all;
+  background: rgba(0, 0, 0, 0.25);
+}
+.overlay.active {
   top: 0;
 }
 

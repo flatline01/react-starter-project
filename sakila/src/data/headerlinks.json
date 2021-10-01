@@ -5,8 +5,13 @@
             "label":"Sakila Actors",
             "url":"/actors"
         },
+        {
+            "id":1,
+            "label":"Movies",
+            "url":"/Movies"
+        },
         { 
-            "id": 1, 
+            "id": 2, 
             "label": "About Us",  
             "url": "/about",
             "nav":[
@@ -20,8 +25,8 @@
                 ]}
             ] 
         },
-        { "id": 2, "label": "Contact", "url": "/contact" },
-        { "id": 3, "label": "Test Route", "target":"internal", "url": "http://localhost:3001/testroute" },
-        { "id": 4, "label": "Google", "target":"external", "url": "https://www.google.com" }
+        { "id": 3, "label": "Contact", "url": "/contact" },
+        { "id": 4, "label": "Test Route", "target":"internal", "url": "http://localhost:3001/testroute" },
+        { "id": 5, "label": "Google", "target":"external", "url": "https://www.google.com" }
     ] 
 }

@@ -38,7 +38,12 @@ router.get("/api/actors/:limit?/:startat?", async function(req,res,next){
   .catch(err=>{
     res.json({err:"no actors found"})
   })
+})
 
+
+router.post("/api/actors/update", function(req,res,next){
+  console.log(req.body)
+  res.json({ok:"Updated actor"})
 })
 
 

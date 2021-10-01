@@ -31,17 +31,20 @@ class SimpleSelect extends Component{
     }
     render(){
         const {selected, items, id} = this.state;
+        let count =0;
         return (
             <label className="simpleSelect">
                 <span>{this.props.title}</span>
                 <select onChange={this.handleChange} id={id}>
                     {
                         items.map(item=>(
-                            (this.props.per === item 
-                                ? (<option value={item} selected>{item}</option>)
-                                : (<option value={item}>{item}</option>) 
-                             )
-                        ))
+                                (this.props.per === item 
+                                    ? (<option value={item} selected key={count++}>{item}</option>)
+                                    : (<option value={item}  key={count++}>{item}</option>) 
+                                )
+                            
+                            )
+                        )
                     }
                 </select>
             </label>
@@ -53,15 +56,136 @@ class Card extends Component{
     constructor(props){
         super(props);
         this.state={
-            editing:false
+            editing:false,
+            item: this.props.item
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleEditButton = this.handleEditButton.bind(this);
+    }
+    handleEditButton(e){
+        this.setState({ editing: true })
+    }
+    handleDoneButton(e) {
+      console.log("done");
+      this.setState({ editing: false })
+    }
+    handleSubmit(event){
+        const data = Object.fromEntries(new FormData(event.target).entries());
+        console.log("submitting", data);
+        fetch(`/api/actors/update`,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(data),
+        })
+        .then(res => res.json())
+        .then((result)=>{
+            console.log('result', result)
+            this.setState({ 
+                editing: false,
+                item:{
+                    imgname:data.imgname,
+                    actor_id:data.actor_id,
+                    first_name:data.first_name,
+                    last_name:data.last_name,
+                    address:data.address,
+                    city:data.city,
+                    district:data.district,
+                    country:data.country,
+                    phone:data.phone,
+                    street:data.street,
+                    intro:data.intro
+                }
+             })
+        })
+
+        
+        event.preventDefault();
     }
     render(){
-        return(
-            <div className="card">
+        const { item } = this.state;
+        if(this.state.editing === false){
+            return(
+                <div className="card">
+                    <div className="controls">
+                        <button onClick={this.handleEditButton}>edit</button>
+                    </div>
+                    <div className="holder">
+                        <a href={`/actors/byId/${item.actor_id}`}>
+                            <h3>{item.first_name.toLowerCase()} {item.last_name.toLowerCase()}</h3>
+                        </a>
+                        <div className="info">
+                            { item.imgname
+                                ? <div className='photo'><div className="photoholder"><img src={`http://localhost:3001/images/profiles/${item.imgname}`} alt={`Headshot for ${item.first_name.toLowerCase()} ${item.last_name.toLowerCase()}`}/></div></div>
+                                : <div className='photo nophoto'></div>
+                            }
+                            <div className="address">
+                                {item.intro
+                                    ? <div className="intro">{item.intro}</div>
+                                    : <div className="intro notext"></div>
 
-            </div>
-        )
+                                }
+                                <h4>Address</h4>
+                                <a href={`/address/${item.actor_id}`}>
+                                    <address>
+                                        <span>{item.address}</span>
+                                        <span>{item.city}</span>
+                                        <span>{item.district}, {
+                                            item.postal_code 
+                                                ? `${item.postal_code}, `
+                                                : ""
+                                            } {item.country}</span>
+                                    </address>
+                                </a>
+                                {item.phone
+                                    ? <a href={`tel:${item.phone}`} className="button callnow">call</a>
+                                    : ""
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+        else if(this.state.editing === "error"){
+            return(
+                <h3>Error Updating</h3>
+            )
+        }
+        else{
+            return(
+                <div className="card editing">
+                    <form id={`edit_${item.actor_id}`} onSubmit={this.handleSubmit}>
+                        <input type="hidden" value={item.actor_id} name="actor_id" />
+                        <input type="hidden" value={item.first_name} name="first_name" />
+                        <input type="hidden" value={item.last_name} name="last_name" />
+                        <input type="hidden" value={item.imgname} name="imgname" />
+                        <div className="holder">
+                            <h3>Editing {item.first_name.toLowerCase()} {item.last_name.toLowerCase()}</h3>
+                            <div className="info">
+                                { item.imgname
+                                    ? <div className='photo'><div className="photoholder"><img src={`http://localhost:3001/images/profiles/${item.imgname}`} alt={`Headshot for ${item.first_name.toLowerCase()} ${item.last_name.toLowerCase()}`}/></div></div>
+                                    : <div className='photo nophoto'></div>
+                                }
+                                <div className="address">
+                                    <div className="intro"><label>Edit Intro<textarea name="intro">{item.intro}</textarea></label></div>
+                                    <h4>Address</h4>
+                                    <label><span>Street</span><input type="text" defaultValue={item.address} name="address"/></label>
+                                    <label><span>City</span><input type="text" defaultValue={item.city} name="city"/></label>
+                                    <label><span>District/state</span><input type="text" defaultValue={item.district} name="district"/></label>
+                                    <label><span>Postal Code</span><input type="text" defaultValue={item.postal_code} name="postal_code"/></label>
+                                    <label><span>Country</span><input type="text" defaultValue={item.country} name="country"/></label>
+                                    <label><span>Phone</span><input type="text" defaultValue={item.phone} name="phone"/></label>    
+                                    <input type="submit" value="Done"/>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            )
+        }
+
     }
 }
 
@@ -164,45 +288,7 @@ class Datagrid  extends Component{
                                 </div>
                                 <div className="cardholder">
                                     {items.map(item => (
-                                        <div className="card" key={item.actor_id}>
-                                            <div className="controls">
-                                                <a href="#edit">edit</a>
-                                            </div>
-                                            <div className="holder">
-                                                <a href={`/actors/byId/${item.actor_id}`}>
-                                                    <h3>{item.first_name.toLowerCase()} {item.last_name.toLowerCase()}</h3>
-                                                </a>
-                                                <div className="info">
-                                                    { item.imgname
-                                                        ? <div className='photo'><div className="photoholder"><img src={`http://localhost:3001/images/profiles/${item.imgname}`} alt={`Headshot for ${item.first_name.toLowerCase()} ${item.last_name.toLowerCase()}`}/></div></div>
-                                                        : <div className='photo nophoto'></div>
-                                                    }
-                                                    <div className="address">
-                                                        {item.intro
-                                                            ? <div className="intro">{item.intro}</div>
-                                                            : <div className="intro notext"></div>
-
-                                                        }
-                                                        <h4>Address</h4>
-                                                        <a href={`/address/${item.actor_id}`}>
-                                                            <address>
-                                                                <span>{item.address}</span>
-                                                                <span>{item.city}</span>
-                                                                <span>{item.district}, {
-                                                                    item.postal_code 
-                                                                        ? `${item.postal_code}, `
-                                                                        : ""
-                                                                    } {item.country}</span>
-                                                            </address>
-                                                        </a>
-                                                        {item.phone
-                                                            ? <a href={`tel:${item.phone}`} className="button callnow">call</a>
-                                                            : ""
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <Card item={item}  key={item.actor_id} />
                                     ))}
                                 </div>
                                 <div>pagination</div>

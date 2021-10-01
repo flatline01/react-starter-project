@@ -80,7 +80,54 @@ class Menu extends Component{
     }
 }
 
+class LoginButton extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            loggedin:false,
+            user:null,
+            token: null,
+            overlay:false
+        };
+        this.handleLogin = this.handleLogin.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
+        this.body = document.getElementsByTagName("body")[0]
+    }
+    handleLogin(){
+       this.body.classList.add("overlay","active");
+       document.querySelectorAll("#loginoverlay")[0].classList.add('active')
+       
+
+    }
+    componentDidMount() {
+        if(document.querySelectorAll("#loginoverlay").length<1){
+            let loginoverlay = document.createElement("div")
+            loginoverlay.classList.add("loginoverlay", "overlay")
+            loginoverlay.id="loginoverlay";
+            this.body.append(loginoverlay)
+        }
+        
+    }
+    handleLogout(){
+
+    }
+    render(){
+        const {loggedin} = this.state
+        if(loggedin === false){
+            return(
+                <button onClick={this.handleLogin}>Login</button>
+            )
+        }
+        else{
+            return(
+                <button onClick={this.handleLogout}>Logout</button>
+            )
+        }
+    }
+}
+
 export {
     Nav,
-    Menu
+    Menu,
+    LoginButton
 }
