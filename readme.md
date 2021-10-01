@@ -4,7 +4,7 @@ Actual project root. We have a node/express backend here, and run the front end 
 
 We will use the default movie store demo database provided by mysql.
 
-This is NOT a production ready repo. This is more trying to glue together react and express into a singular project, so we dont have to run two services or deployments.
+This is NOT a production ready repo. This is more trying to glue together react and express into a singular project, so we dont have to run two services or deployments. There is minimal design, just enough to make the site work.
 
 There is currently no auth or security implemented. The express backend will only echo requests and/or success messages without committing changes to the database. This will be phase two, as we set up tokens, users, and auth.
 
